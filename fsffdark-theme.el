@@ -154,7 +154,7 @@ Example values
    `(org-special-keyword ((,c (:inherit shadow))))
    `(outline-1 ((,c (:slant italic :background "grey20"))))
    `(outline-2 ((,c (:slant italic :foreground "#e6cb1e"))))
-   `(outline-3 ((,c (:slant italic :foreground "#e66102"))))
+   `(outline-3 ((,c (:slant italic :foreground "#e67c02"))))
    `(outline-4 ((,c (:slant italic :foreground "#e60219"))))
    `(outline-5 ((,c (:slant italic :foreground "#e6008e"))))
    `(outline-6 ((,c (:slant italic :foreground "#cb00e6"))))
@@ -195,7 +195,7 @@ Example values
 
    `(imenu-list-entry-face-0 ((,c (:foreground "white"))))
    `(imenu-list-entry-face-1 ((,c (:foreground "#e6cb1e"))))
-   `(imenu-list-entry-face-2 ((,c (:foreground "#e66102"))))
+   `(imenu-list-entry-face-2 ((,c (:foreground "#e67c02"))))
    `(imenu-list-entry-face-3 ((,c (:foreground "#e60219"))))
    
    `(rainbow-delimiters-depth-1-face ((,c (:foreground "#e91e63"))))
