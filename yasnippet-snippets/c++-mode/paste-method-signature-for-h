@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: paste method signature for h
+# key: paste
+# --
+`(replace-regexp-in-string " {" ";" (replace-regexp-in-string " [[:alpha:]]+::" " " (substring-no-properties (current-kill 0 t))))`

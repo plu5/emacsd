@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: from import
+# key: from
+# --
+from ${1:lib} import ${2:thing}

@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: provide
+# key: pro
+# key: provide
+# (from magnar’s setup)
+# --
+(provide '`(replace-regexp-in-string "\\..*$"  "" (buffer-name))`)$0

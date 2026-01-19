@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: gtd-jour
+# key: jour
+# --
+    + *mangé:* 
+    + *écouté/regardé:* $0

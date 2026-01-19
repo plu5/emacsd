@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: require
+# key: req
+# key: require
+# (from magnar’s setup)
+# --
+(require '$1)$0

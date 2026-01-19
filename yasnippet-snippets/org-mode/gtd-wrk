@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: gtd-wrk
+# key: w
+# --
+    + `(format-time-string "%H:%M")`-$0@wrk

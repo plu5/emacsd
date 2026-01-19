@@ -1,0 +1,61 @@
+# -*- mode: snippet -*-
+# name: bmqs
+# key: bmqs    
+# --
+[BMQs]
+
+BMQs tracker of how many of Shadow LotH questions the LotH answers: **x/x answered** (↑/↓/-)
+
+[Happened at $0](). [Hansard]().
+
+*(Business Questions main exchange. \`Q\`s by Jesse Norman, answers by Alan Campbell. \`REMARK\`s are not questions and do not count for the tracker.)*
+
+#### (1) 📜/✔️/❌ REMARK/Qn:
+
+> **NORMAN:**
+
+→
+
+> **CAMPBELL:**
+
+#### (2) 📜/✔️/❌ REMARK/Qn:
+
+> **NORMAN:**
+
+→
+
+> **CAMPBELL:**
+
+#### (3) 📜/✔️/❌ REMARK/Qn:
+
+> **NORMAN:**
+
+→
+
+> **CAMPBELL:**
+
+#### (4) 📜/✔️/❌ REMARK/Qn:
+
+> **NORMAN:**
+
+→
+
+> **CAMPBELL:**
+
+#### (5) 📜/✔️/❌ REMARK/Qn:
+
+> **NORMAN:**
+
+→
+
+> **CAMPBELL:**
+
+-----
+
+#### ∗ ∗ ∗
+
+
+
+-----
+
+[Spreadsheet](https://docs.google.com/spreadsheets/d/1bfMFJBynwUYCjbNI-F_FR9vbvz5fAf_zwecvlZEAQjI)

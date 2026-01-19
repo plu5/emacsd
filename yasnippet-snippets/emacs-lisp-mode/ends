@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: ends
+# key: ends
+# (from magnar’s setup)
+# --
+;;; `(buffer-name)` ends here$0

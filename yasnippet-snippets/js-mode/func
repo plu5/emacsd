@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: func
+# key: func
+# --
+/**
+ * ${3:description}
+ * ${2:$(concat (if (eq 0 (length yas-text)) "" "@param {} ")
+         (mapconcat 'identity (split-string yas-text ", ") "\n  * @param {} "))}
+ */
+function ${1:FuncName}(${2:args}) {
+  $0
+}

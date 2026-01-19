@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: autoload
+# key: auto
+# key: autoload
+# (from magnar’s setup)
+# --
+;;;###autoload

@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: path and last date of modification
+# key: der
+# --
+${1:bufname} dernière date de modification :
+${1:$(copy-file-last-date-to-clipboard (buffer-name (car (match-buffers yas-text))) t)}
+${1:$(copy-path-to-clipboard (buffer-name (car (match-buffers yas-text))) t)}
+
+$0

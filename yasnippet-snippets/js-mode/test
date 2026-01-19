@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: test
+# key: test
+# --
+test('$1', () => {
+  expect($2).${3:toStrictEqual}($4);
+});

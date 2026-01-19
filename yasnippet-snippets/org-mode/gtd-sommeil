@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: gtd-sommeil
+# key: s
+# --
+    + @sommeil $0

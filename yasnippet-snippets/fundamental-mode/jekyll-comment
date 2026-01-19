@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: jekyll comment
+# key: comment
+# --
+{%comment%}{%raw%}
+$0
+{%endraw%}{%endcomment%}

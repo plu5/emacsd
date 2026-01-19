@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: md-kbd
+# key: k
+# --
+<kbd>$0</kbd>

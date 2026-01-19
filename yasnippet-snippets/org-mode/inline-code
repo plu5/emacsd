@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: inline-code
+# key: src
+# --
+src_${1:emacs-lisp}[:exports code]{$0}

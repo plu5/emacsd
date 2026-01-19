@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: method
+# key: meth
+# --
+${1:void} `(car (split-string (buffer-name) "\\."))`::$2($3) {
+    $0
+}
