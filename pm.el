@@ -2,7 +2,7 @@
 
 ;;; HOW TO USE THIS FILE:
 ;; add to the top of init.el:
-;; (add-to-list 'load-path "W:/B/Dropbox/Documents/emacs")
+;; (add-to-list 'load-path "path/to/folder")
 ;; (require 'pm)
 
 ;;; HOW TO INSTALL PACKAGES:
