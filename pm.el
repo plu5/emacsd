@@ -436,8 +436,10 @@ replaces common OCR issues and also replaces breaklines with spaces"
 (use-package org
   :bind
   (("C-z t t" . (lambda () (interactive) (org-time-stamp '(4))))
-   ("C-c o" . org-goto)
    :map org-mode-map
+   ("C-c o" . org-goto)
+   ("C-c n" . org-next-item)
+   ("C-c p" . org-previous-item)
    ;; ("<C-return>" . open-line-below) ; 2024-12-10 17:48 but it seems like just normal enter does the same sort of thing nowadays
    ("<return>" . org-return-and-maybe-indent) ; most of the time doesn't indent, which is what i want
    ("<C-return>" . org-return))
