@@ -164,6 +164,17 @@
                 16)))
     (insert-char code)))
 (define-key global-map (kbd "C-S-u") 'my/insert-unicode-char)
+;;; + rectangle yank push lines
+;; by jue https://emacs.stackexchange.com/a/46352/15886
+(defun my-insert-rectangle-push-lines ()
+  "Yank a rectangle as if it was an ordinary kill."
+  (interactive "*")
+  (when (and (use-region-p) (delete-selection-mode))
+    (delete-region (region-beginning) (region-end)))
+  (save-restriction
+    (narrow-to-region (point) (mark))
+    (yank-rectangle)))
+(global-set-key (kbd "C-x r C-y") #'my-insert-rectangle-push-lines)
 ;;; + verdicts
 ;; inserts verdicts into buffer and adds &gt; to the beginning of each para
 (defun p-verdicts ()
