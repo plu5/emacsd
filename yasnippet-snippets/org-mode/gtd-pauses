@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: gtd-pauses
+# key: pauses
+# --
+    + *pauses:* $0
