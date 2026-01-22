@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: gtd-day
-# key: day
-# --
-    + *ate:* 
-    + *listened/watched:* 
-    + ${1:sommeil }
