@@ -1,5 +1,6 @@
 # -*- mode: snippet -*-
 # name: gtd-pauses
 # key: pauses
+# condition: (looking-back "^pauses")
 # --
     + *pauses:* $0

@@ -1,5 +1,6 @@
 # -*- mode: snippet -*-
 # name: gtd-sommeil
 # key: s
+# condition: (looking-back "^s")
 # --
     + @sommeil $0

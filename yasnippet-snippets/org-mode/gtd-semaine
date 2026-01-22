@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: gtd semaine
 # key: sem
+# condition: (looking-back "^sem")
 # --
 <2026-${1:m}-${2:1} à 2026-${1:$(yas-text)}-${2:$(format "%02d" (+ 6 (string-to-number yas-text)))}>
 - _Dimanche_ (${2:$(+ 0 (string-to-number yas-text))}): ✓/✓✓/✓✓✓/x$0${2:$(p-str-taches-predefinies-pour-date (concat (yas-field-value 1) "-" (format "%02d" (+ 0 (string-to-number yas-text)))))}

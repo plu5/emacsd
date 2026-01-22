@@ -1,6 +1,7 @@
 # -*- mode: snippet -*-
 # name: gtd-jour
 # key: jour
+# condition: (looking-back "^jour")
 # --
     + *mangé:* 
     + *écouté/regardé:* $0

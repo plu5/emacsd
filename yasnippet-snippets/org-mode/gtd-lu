@@ -1,5 +1,6 @@
 # -*- mode: snippet -*-
 # name: gtd-lu
 # key: lu
+# condition: (looking-back "^lu")
 # --
     + *lu:* $0

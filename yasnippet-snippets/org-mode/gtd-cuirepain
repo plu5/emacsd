@@ -1,5 +1,6 @@
 # -*- mode: snippet -*-
 # name: gtd-cuirepain
 # key: pain
+# condition: (looking-back "^pain")
 # --
     + `(format-time-string "%H:%M")` @cuire : pain : ${1:10}g levure + ${3:250}g farine + ${2:100+100}ml eau $0
