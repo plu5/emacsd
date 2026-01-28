@@ -84,7 +84,7 @@ Example values
    `(font-lock-doc-face ((,c (:foreground "red3"))))
    `(font-lock-keyword-face ((,c (:foreground "white" :weight bold))))
    `(font-lock-function-name-face ((,c (:foreground "steelblue"))))
-   `(font-lock-variable-name-face ((,c (:foreground "#91b"))))
+   `(font-lock-variable-name-face ((,c (:foreground "#d973f2"))))
    `(font-lock-constant-face ((,c (:foreground "lightslateblue"))))
    `(font-lock-type-face ((,c (:foreground "khaki"))))
    
