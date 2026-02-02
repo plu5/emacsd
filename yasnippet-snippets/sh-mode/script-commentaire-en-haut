@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: script-commentaire-en-haut
+# key: sh
+# condition: (looking-back "^sh")
+# --
+#!/usr/bin/env sh
+# ${1:name}
+# ${1:$(file-creation-date)}
+#
+# Dependencies:
+# - ${2}
+#
+# Usage:
+# $0

@@ -348,6 +348,24 @@ replaces common OCR issues and also replaces breaklines with spaces"
           modified
         (kill-new modified)
         (message "Copied file modification date '%s' to the clipboard. (file '%s')" modified path)))))
+;; get file creation date, which i use in yasnippets
+(defun file-creation-date (&optional bufname)
+  (interactive)
+  (let* ((path (if (null bufname) (buffer-file-name)
+                 (buffer-file-name (get-buffer bufname))))
+         (output-buffer "*date*")
+         ;; to get the whole date use "Birth: \\(.*\\)" instead
+         ;; this one gets just Y-m-d H:M
+         (date-regexp
+          "Birth: \\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\} [0-9]\\{2\\}:[0-9]\\{2\\}\\)"))
+    (call-process "stat" nil output-buffer nil path)
+    (save-excursion
+      (with-current-buffer output-buffer
+        (end-of-buffer)
+        (re-search-backward date-regexp nil t 2)
+        (setq output (match-string-no-properties 1))))
+    (kill-buffer output-buffer)
+    (message output)))
 ;;
 (defun p-switch-to-main-file ()
   (interactive)
