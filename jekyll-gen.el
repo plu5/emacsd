@@ -32,12 +32,13 @@ lang:
 (defun create-jekyll-post ()
   ;; requires jekyll-posts-dir to be defined
   (interactive)
-  (let ((date (jekyll-date))
-        (name (subst-char-in-string
+  (let ((name (subst-char-in-string
                ? ?-                     ; spaces to hyphen
-               (read-string "Jekyll post filename (without date): ")))
+               (string-replace
+                "{date}" (jekyll-date)
+                (read-string "Jekyll post name: " "{date} "))))
         (location (read-string "Location: " "_posts")))
-    (find-file (file-name-concat jekyll-posts-dir ".." location (concat date "-" name ".md")))
+    (find-file (file-name-concat jekyll-posts-dir ".." location (concat name ".md")))
     (insert (jekyll-populated-template))
     (search-backward "title:")
     (end-of-line)
