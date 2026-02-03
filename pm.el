@@ -21,7 +21,7 @@
 ;; [dependencies:] noflet (dependency for ido-preview)
 
 ;;; LIST OF LOCAL PACKAGES IN LOAD PATH:
-;; [optional:] ido-preview grab-and-drag org-simple-expiry doentry-gen
+;; [optional:] ido-preview grab-and-drag org-simple-expiry doentry-gen doentry-mode piped-mode jekyll-gen
 
 ;;; LIST OF LOCAL FILES IN LOAD PATH (NOT INCLUDING LOCAL PACKAGES LISTED ABOVE):
 ;; pm.el (you are here), fsffdark-theme.el (in p-custom-theme-load-path), setup-hippie.el
@@ -34,9 +34,12 @@
 (setq p-custom-theme-load-path "w:/C/home/.emacs.d/_/reps/emacs-fsff-theme")
 (setq p-pnotes-path (if (eq system-type 'windows-nt)
                         "W:/B/Dropbox/Apps" "/media/pnotes"))
+(setq p-reps-dir "/media/Windows/Users/pm/dev/reps")
+
 (setq p-verdicts-path (expand-file-name "verdicts.txt" p-pnotes-path))
 (setq p-yas-snippet-dir (expand-file-name "emacs/yasnippet-snippets" p-pnotes-path))
 (setq p-undo-tree-history "~/.emacs.d/undo")
+(setq jekyll-posts-dir (expand-file-name "plu5.github.io/_posts" p-reps-dir))
 
 ;;; UNIQUE BUFFERS/FILES:
 (setq p-main-file (expand-file-name "PlainText 2/pers/gtd/2026.org" p-pnotes-path))
@@ -704,6 +707,8 @@ replaces common OCR issues and also replaces breaklines with spaces"
 ;;   :after dired)
 ;; + piped-mode
 (use-package piped-mode :ensure nil)
+;; + jekyll-gen
+(use-package jekyll-gen :ensure nil)
 
 
 ;;; NOTES
