@@ -3,6 +3,7 @@
 ;; 2026-02-03 09:15
 ;;
 ;; Dependencies:
+;; - emacs >28.1 (because of file-name-concat)
 ;; - requires jekyll-posts-dir to be defined
 
 (setq jekyll-template "---
@@ -34,8 +35,9 @@ lang:
   (let ((date (jekyll-date))
         (name (subst-char-in-string
                ? ?-                     ; spaces to hyphen
-               (read-string "Jekyll post filename (without date): "))))
-    (find-file (expand-file-name (concat date "-" name ".md") jekyll-posts-dir))
+               (read-string "Jekyll post filename (without date): ")))
+        (location (read-string "Location: " "_posts")))
+    (find-file (file-name-concat jekyll-posts-dir ".." location (concat date "-" name ".md")))
     (insert (jekyll-populated-template))
     (search-backward "title:")
     (end-of-line)
