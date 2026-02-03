@@ -289,6 +289,20 @@ replaces common OCR issues and also replaces breaklines with spaces"
     (if res-liste
         (concat "\n    + " (mapconcat 'identity res-liste "\n    + "))
       "")))
+;; github.com/alexott/emacs-configs/blob/91fb0a1/rc/emacs-rc-muse.el#L306
+(defun re-replace-text (from to)
+  (save-excursion
+    ;; had to add this to make it work regardless of point position
+    (beginning-of-buffer)
+    (while (re-search-forward from nil t)
+      (save-restriction
+        (narrow-to-region (match-beginning 0) (match-end 0))
+        (replace-match to t)))))
+;; mise à jour du champ date de modification
+(defun update-modified-date-field ()
+  (interactive)
+  (let ((date (copy-file-last-date-to-clipboard nil t)))
+    (re-replace-text "^modified_date: .*$" (concat "modified_date: " date))))
 
 ;;; FILE DEFUNS (not bound to anything atm, but useful functions to be able to run with M-x)
 ;; magnars
