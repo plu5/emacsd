@@ -100,6 +100,7 @@
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 (global-set-key (kbd "C-=") 'text-scale-decrease)
 (global-set-key (kbd "C-+") 'text-scale-increase)
+(global-set-key (kbd "<XF86Paste>") 'yank)
 
 ;;; WINDOW GEOMETRY
 (defun ---WINDOW-GEOMETRY () ())
