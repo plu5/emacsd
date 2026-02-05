@@ -303,9 +303,11 @@ replaces common OCR issues and also replaces breaklines with spaces"
         (narrow-to-region (match-beginning 0) (match-end 0))
         (replace-match to t)))))
 ;; mise à jour du champ date de modification
-(defun update-modified-date-field ()
-  (interactive)
-  (let ((date (copy-file-last-date-to-clipboard nil t)))
+(defun update-modified-date-field (from-disk)
+  (interactive
+   (list (y-or-n-p "Date from disk? (n will put current date) ")))
+  (let ((date (if from-disk (copy-file-last-date-to-clipboard nil t)
+                (format-time-string "%F %H:%M"))))
     (re-replace-text "^modified_date: .*$" (concat "modified_date: " date))))
 (defun maybe-update-modified-date-field ()
   (interactive)
@@ -316,7 +318,7 @@ replaces common OCR issues and also replaces breaklines with spaces"
       (beginning-of-buffer)
       (when (and (re-search-forward "^modified_date:")
                  (y-or-n-p "Update modified_date? "))
-        (update-modified-date-field)))))
+        (update-modified-date-field nil)))))
 (add-hook 'before-save-hook #'maybe-update-modified-date-field)
 
 ;;; FILE DEFUNS (not bound to anything atm, but useful functions to be able to run with M-x)
