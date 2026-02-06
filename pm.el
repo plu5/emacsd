@@ -280,15 +280,30 @@ replaces common OCR issues and also replaces breaklines with spaces"
       '(("11-23" . "[ ] 00:00 souhaite à ls bon anniversaire")
         ("05-10" . "[ ] 00:00 souhaite à os bon anniversaire")
         ("04-01" . "[ ] 00:00 souhaite à f bon anniversaire")
-        ("12-19" . "[ ] awa vault")
-        ("12-17" . "[ ] lenovo ga")
+        ("02-20" . "[ ] @tat awav")
+        ("jeudi" . "[ ] @red bmqs")
+        ("jeudi" . "[ ] @tat epic")
         ))
+(defvar jours-de-la-semaine
+  '(("dimanche" . 0) ("lundi" . 1) ("mardi" . 2) ("mercredi" . 3) ("jeudi" . 4)
+    ("vendredi" . 5) ("samedi" . 6)))
+(defun jour-de-la-semaine-dune-date (date)
+  "Convertit une date de format YYYY-MM-DD au jour de la semaine correpondant"
+  (let ((n 
+            (nth 6 (decode-time (org-time-string-to-time date)))))
+    (dolist (j jours-de-la-semaine)
+      (message "%d %d" n (cdr j))
+      (when (= n (cdr j))
+        (return (car j))))))
 (defun p-str-taches-predefinies-pour-date (date)
   "Renvoie string liste des tâche(s) prédéfinies pour DATE (format MM-DD)."
   (let ((res-liste nil))
     (message date)
     (dolist (item p-taches-predefinies)
-      (when (string= date (car item))
+      (when (or (string= date (car item))
+                (string= (jour-de-la-semaine-dune-date
+                          (concat (format-time-string "%Y") "-" date))
+                          (car item)))
         (push (cdr item) res-liste)))
     (if res-liste
         (concat "\n    + " (mapconcat 'identity res-liste "\n    + "))
