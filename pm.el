@@ -309,7 +309,9 @@ replaces common OCR issues and also replaces breaklines with spaces"
   (let ((date (if from-disk (copy-file-last-date-to-clipboard nil t)
                 (format-time-string "%F %H:%M"))))
     (re-replace-text "^modified_date: .*$" (concat "modified_date: " date))))
-(set (make-local-variable 'always-update-modified-date-field) nil)
+(defvar-local always-update-modified-date-field nil
+  "Don't ask and always update modified date field if it exists
+(maybe-update-modified-date-field)")
 (defun maybe-update-modified-date-field ()
   (interactive)
   ;; yibe https://stackoverflow.com/a/6886731/18396947
