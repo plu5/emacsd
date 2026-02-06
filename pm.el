@@ -292,7 +292,6 @@ replaces common OCR issues and also replaces breaklines with spaces"
   (let ((n 
             (nth 6 (decode-time (org-time-string-to-time date)))))
     (dolist (j jours-de-la-semaine)
-      (message "%d %d" n (cdr j))
       (when (= n (cdr j))
         (return (car j))))))
 (defun p-str-taches-predefinies-pour-date (date)
@@ -301,9 +300,10 @@ replaces common OCR issues and also replaces breaklines with spaces"
     (message date)
     (dolist (item p-taches-predefinies)
       (when (or (string= date (car item))
-                (string= (jour-de-la-semaine-dune-date
+                (and (string-match-p "[d-v]" (car item))
+                     (string= (jour-de-la-semaine-dune-date
                           (concat (format-time-string "%Y") "-" date))
-                          (car item)))
+                          (car item))))
         (push (cdr item) res-liste)))
     (if res-liste
         (concat "\n    + " (mapconcat 'identity res-liste "\n    + "))
