@@ -309,7 +309,7 @@ replaces common OCR issues and also replaces breaklines with spaces"
   (let ((date (if from-disk (copy-file-last-date-to-clipboard nil t)
                 (format-time-string "%F %H:%M"))))
     (re-replace-text "^modified_date: .*$" (concat "modified_date: " date))))
-(defvar-local always-update-modified-date-field nil
+(defvar-local always-update-modified-date-field t
   "Don't ask and always update modified date field if it exists
 (maybe-update-modified-date-field)")
 (defun maybe-update-modified-date-field ()
@@ -322,11 +322,7 @@ replaces common OCR issues and also replaces breaklines with spaces"
       (when (and (re-search-forward "^modified_date:")
                  (or always-update-modified-date-field
                      (y-or-n-p "Update modified_date? ")))
-        (update-modified-date-field nil)
-        (unless always-update-modified-date-field
-          (message
-           "setq always-update-modified-date-field t to remember this choice")
-          )))))
+        (update-modified-date-field nil)))))
 (add-hook 'before-save-hook #'maybe-update-modified-date-field)
 
 ;;; FILE DEFUNS (not bound to anything atm, but useful functions to be able to run with M-x)
