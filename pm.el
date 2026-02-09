@@ -340,6 +340,21 @@ replaces common OCR issues and also replaces breaklines with spaces"
         (update-modified-date-field nil)))))
 (add-hook 'before-save-hook #'maybe-update-modified-date-field)
 
+;;; GIT DEFUNS
+;; site md files (notes / articles)
+;; this puts literal '' in the commit message which was an accident
+;; but I decided to leave it like that because it communicates that it
+;; was an automatic commit
+(defun magit-commit-texts ()
+  (interactive)
+  (magit-with-toplevel
+    (let ((date (format-time-string "%F %H:%M"))
+          (magit-git-global-arguments
+           (remove "--literal-pathspecs" magit-git-global-arguments)))
+      (magit-run-git "add" "*.md")
+      (magit-run-git "commit" (concat "--message='Update texts " date "'")
+                     "--"))))
+
 ;;; FILE DEFUNS (not bound to anything atm, but useful functions to be able to run with M-x)
 ;; magnars
 (defun ---FILE-DEFUNS () ())
