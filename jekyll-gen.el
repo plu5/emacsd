@@ -20,6 +20,21 @@ lang:
 {% include fin.html %}
 ")
 
+(setq devlog-template "---
+layout: post
+title: {num} — 
+date: {date}
+modified_date: {date}
+categories:
+lang: en
+redirect_from: /devlog/{num}
+---
+
+##
+
+{% include fin.html %}
+")
+
 (defun jekyll-date ()
   (format-time-string "%F"))
 
@@ -43,6 +58,34 @@ lang:
     (search-backward "title:")
     (end-of-line)
   ))
+
+(defun last-file-lexicographically (path &optional match nameonly)
+  (let ((full (if nameonly nil 'full)))
+    (car (sort (directory-files path full match t) #'string-greaterp))))
+
+(defun devlog-n ()
+  "Return next devlog number"
+  ;; requires jekyll-posts-dir to be defined and for there to be _devlog in it
+  ;; and for all the names of devlogs to start with a number followed by hypen
+  (1+
+   (string-to-number
+    (car (split-string
+          (last-file-lexicographically
+           (file-name-concat jekyll-posts-dir "../_devlog") ".md" t) "-")))))
+
+(defun devlog-populated-template (num)
+  (string-replace
+   "{date}" (jekyll-datetime)
+   (string-replace "{num}" num devlog-template)))
+
+(defun create-devlog ()
+  ;; requires jekyll-posts-dir to be defined
+  (interactive)
+  (let ((num (number-to-string (devlog-n))))
+    (find-file (file-name-concat jekyll-posts-dir "../_devlog" (concat num ".md")))
+    (insert (devlog-populated-template num))
+    (search-backward "title:")
+    (end-of-line)))
 
 (provide 'jekyll-gen)
 
