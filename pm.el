@@ -285,15 +285,11 @@ replaces common OCR issues and also replaces breaklines with spaces"
         ("jeudi" . "[ ] @tat epic")
         ))
 (defvar jours-de-la-semaine
-  '(("dimanche" . 0) ("lundi" . 1) ("mardi" . 2) ("mercredi" . 3) ("jeudi" . 4)
-    ("vendredi" . 5) ("samedi" . 6)))
+  '("dimanche" "lundi" "mardi" "mercredi" "jeudi" "vendredi" "samedi"))
 (defun jour-de-la-semaine-dune-date (date)
   "Convertit une date de format YYYY-MM-DD au jour de la semaine correpondant"
-  (let ((n 
-            (nth 6 (decode-time (org-time-string-to-time date)))))
-    (dolist (j jours-de-la-semaine)
-      (when (= n (cdr j))
-        (return (car j))))))
+  (let ((n (nth 6 (decode-time (org-time-string-to-time date)))))
+    (nth n jours-de-la-semaine)))
 (defun p-str-taches-predefinies-pour-date (date)
   "Renvoie string liste des tâche(s) prédéfinies pour DATE (format MM-DD)."
   (let ((res-liste nil))
