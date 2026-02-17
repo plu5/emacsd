@@ -59,9 +59,14 @@ redirect_from: /devlog/{num}
     (end-of-line)
   ))
 
-(defun last-file-lexicographically (path &optional match nameonly)
+(defun last-file-by-leading-number (path &optional match nameonly)
+  "Return path of last file in PATH by leading number in filename.
+If MATCH is non-nil, consider only files whose name matches regexp pattern.
+If NAMEONLY is non-nil, return only name of the file, not complete path."
   (let ((full (if nameonly nil 'full)))
-    (car (sort (directory-files path full match t) #'string-greaterp))))
+    (car (sort (directory-files path full match t)
+               (lambda (a b)
+                 (> (string-to-number a) (string-to-number b)))))))
 
 (defun devlog-n ()
   "Return next devlog number"
@@ -70,7 +75,7 @@ redirect_from: /devlog/{num}
   (1+
    (string-to-number
     (car (split-string
-          (last-file-lexicographically
+          (last-file-by-leading-number
            (file-name-concat jekyll-posts-dir "../_devlog") ".md" t) "-")))))
 
 (defun devlog-populated-template (num)
