@@ -326,8 +326,8 @@ Renvoie la date actuelle si celle de la semaine dernière n'est pas trouvée."
            (time-add (org-time-string-to-time
                       (match-string-no-properties 1))
                      (* 7 24 3600)))))))
-(defun gtd-semaine-an ()
-  "Renvoie l'an de `gtd-semaine-date'."
+(defun gtd-semaine-annee ()
+  "Renvoie l'année de `gtd-semaine-date'."
   (car (split-string (gtd-semaine-date) "-")))
 (defun gtd-semaine-mois ()
   "Renvoie le mois de `gtd-semaine-date'."
