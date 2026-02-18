@@ -2,12 +2,14 @@
 # name: gtd semaine
 # key: sem
 # condition: (looking-back "^sem")
+# comment: yas-field-value doesn't work with dynamic placeholder fields
 # --
-<2026-${1:m}-${2:1} à 2026-${1:$(yas-text)}-${2:$(format "%02d" (+ 6 (string-to-number yas-text)))}>
-- _Dimanche_ (${2:$(+ 0 (string-to-number yas-text))}): ✓/✓✓/✓✓✓/x$0${2:$(p-str-taches-predefinies-pour-date (concat (yas-field-value 1) "-" (format "%02d" (+ 0 (string-to-number yas-text)))))}
-- _Lundi_ (${2:$(+ 1 (string-to-number yas-text))}): ✓/✓✓/✓✓✓/x${2:$(p-str-taches-predefinies-pour-date (concat (yas-field-value 1) "-" (format "%02d" (+ 1 (string-to-number yas-text)))))}
-- _Mardi_ (${2:$(+ 2 (string-to-number yas-text))}): ✓/✓✓/✓✓✓/x${2:$(p-str-taches-predefinies-pour-date (concat (yas-field-value 1) "-" (format "%02d" (+ 2 (string-to-number yas-text)))))}
-- _Mercredi_ (${2:$(+ 3 (string-to-number yas-text))}): ✓/✓✓/✓✓✓/x${2:$(p-str-taches-predefinies-pour-date (concat (yas-field-value 1) "-" (format "%02d" (+ 3 (string-to-number yas-text)))))}
-- _Jeudi_ (${2:$(+ 4 (string-to-number yas-text))}): ✓/✓✓/✓✓✓/x${2:$(p-str-taches-predefinies-pour-date (concat (yas-field-value 1) "-" (format "%02d" (+ 4 (string-to-number yas-text)))))}
-- _Vendredi_ (${2:$(+ 5 (string-to-number yas-text))}): ✓/✓✓/✓✓✓/x${2:$(p-str-taches-predefinies-pour-date (concat (yas-field-value 1) "-" (format "%02d" (+ 5 (string-to-number yas-text)))))}
-- _Samedi_ (${2:$(+ 6 (string-to-number yas-text))}): ✓/✓✓/✓✓✓/x${2:$(p-str-taches-predefinies-pour-date (concat (yas-field-value 1) "-" (format "%02d" (+ 6 (string-to-number yas-text)))))}
+*** Semaine `(gtd-semaine-n)`
+<${1:`(gtd-semaine-an)`}-${2:`(gtd-semaine-mois)`}-${3:`(gtd-semaine-jour)`} à ${1:$(yas-text)}-${2:$(yas-text)}-${3:$(format "%02d" (+ 6 (string-to-number yas-text)))}>
+- _Dimanche_ (${3:$(+ 0 (string-to-number yas-text))}): ✓/✓✓/✓✓✓/x$0${3:$(p-str-taches-predefinies-pour-date (concat (or (yas-field-value 2) (gtd-semaine-mois)) "-" (format "%02d" (+ 0 (string-to-number yas-text)))))}
+- _Lundi_ (${3:$(+ 1 (string-to-number yas-text))}): ✓/✓✓/✓✓✓/x${3:$(p-str-taches-predefinies-pour-date (concat (or (yas-field-value 2) (gtd-semaine-mois)) "-" (format "%02d" (+ 1 (string-to-number yas-text)))))}
+- _Mardi_ (${3:$(+ 2 (string-to-number yas-text))}): ✓/✓✓/✓✓✓/x${3:$(p-str-taches-predefinies-pour-date (concat (or (yas-field-value 2) (gtd-semaine-mois)) "-" (format "%02d" (+ 2 (string-to-number yas-text)))))}
+- _Mercredi_ (${3:$(+ 3 (string-to-number yas-text))}): ✓/✓✓/✓✓✓/x${3:$(p-str-taches-predefinies-pour-date (concat (or (yas-field-value 2) (gtd-semaine-mois)) "-" (format "%02d" (+ 3 (string-to-number yas-text)))))}
+- _Jeudi_ (${3:$(+ 4 (string-to-number yas-text))}): ✓/✓✓/✓✓✓/x${3:$(p-str-taches-predefinies-pour-date (concat (or (yas-field-value 2) (gtd-semaine-mois)) "-" (format "%02d" (+ 4 (string-to-number yas-text)))))}
+- _Vendredi_ (${3:$(+ 5 (string-to-number yas-text))}): ✓/✓✓/✓✓✓/x${3:$(p-str-taches-predefinies-pour-date (concat (or (yas-field-value 2) (gtd-semaine-mois)) "-" (format "%02d" (+ 5 (string-to-number yas-text)))))}
+- _Samedi_ (${3:$(+ 6 (string-to-number yas-text))}): ✓/✓✓/✓✓✓/x${3:$(p-str-taches-predefinies-pour-date (concat (or (yas-field-value 2) (gtd-semaine-mois)) "-" (format "%02d" (+ 6 (string-to-number yas-text)))))}

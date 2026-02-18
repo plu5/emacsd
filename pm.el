@@ -304,6 +304,37 @@ replaces common OCR issues and also replaces breaklines with spaces"
     (if res-liste
         (concat "\n    + " (mapconcat 'identity res-liste "\n    + "))
       "")))
+;; + streamline gtd-semaine
+(defun gtd-semaine-n ()
+  "Renvoie le numéro de la semaine prochaine selon la dernière.
+Renvoie 1 si la section de la semaine dernière n'est pas trouvée."
+  (save-excursion
+    (end-of-buffer)
+    (re-search-backward "^*** Semaine \\([0-9]+\\)" nil t)
+    (1+ (string-to-number (or (match-string-no-properties 1) "0")))))
+(defun gtd-semaine-date ()
+  "Renvoie la date de début de la semaine prochaine selon la dernière.
+Renvoie la date actuelle si celle de la semaine dernière n'est pas trouvée."
+  (save-excursion
+    (end-of-buffer)
+    (re-search-backward
+     "^<\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\}\\) " nil t)
+    (let ((res (match-string-no-properties 1)))
+      (format-time-string
+       "%F"
+       (if res
+           (time-add (org-time-string-to-time
+                      (match-string-no-properties 1))
+                     (* 7 24 3600)))))))
+(defun gtd-semaine-an ()
+  "Renvoie l'an de `gtd-semaine-date'."
+  (car (split-string (gtd-semaine-date) "-")))
+(defun gtd-semaine-mois ()
+  "Renvoie le mois de `gtd-semaine-date'."
+  (nth 1 (split-string (gtd-semaine-date) "-")))
+(defun gtd-semaine-jour ()
+  "Renvoie le jour de `gtd-semaine-date'."
+  (nth 2 (split-string (gtd-semaine-date) "-")))
 ;; github.com/alexott/emacs-configs/blob/91fb0a1/rc/emacs-rc-muse.el#L306
 (defun re-replace-text (from to)
   (save-excursion
