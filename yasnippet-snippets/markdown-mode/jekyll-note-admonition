@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: jekyll-note-admonition
+# key: note
+# condition: (looking-back "^note")
+# --
+{% include note.html content='
+> [!NOTE]
+> ${1:Souviens-toi d\'échapper les \'}
+' %}
