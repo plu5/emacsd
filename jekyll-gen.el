@@ -30,6 +30,8 @@ lang: en
 redirect_from: /devlog/{num}
 ---
 
+WIP - this devlog is unfinished
+
 ##
 
 {% include fin.html %}
