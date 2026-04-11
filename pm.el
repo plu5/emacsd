@@ -318,14 +318,14 @@ Renvoie la date actuelle si celle de la semaine dernière n'est pas trouvée."
   (save-excursion
     (end-of-buffer)
     (re-search-backward
-     "^<\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\}\\) " nil t)
+     "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\}\\)>$" nil t)
     (let ((res (match-string-no-properties 1)))
       (format-time-string
        "%F"
        (if res
            (time-add (org-time-string-to-time
                       (match-string-no-properties 1))
-                     (* 7 24 3600)))))))
+                     (* 1 24 3600)))))))
 (defun gtd-semaine-annee ()
   "Renvoie l'année de `gtd-semaine-date'."
   (car (split-string (gtd-semaine-date) "-")))
