@@ -28,9 +28,8 @@ modified_date: {date}
 categories:
 lang: en
 redirect_from: /devlog/{num}
+wip: true
 ---
-
-WIP - this devlog is unfinished
 
 ##
 
