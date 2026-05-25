@@ -805,7 +805,10 @@ End of week is either a Saturday or the last day of the month."
 ;; + hippie-expand (builtin)
 (use-package setup-hippie :ensure nil)
 ;; + doentry-gen
-(use-package doentry-gen :ensure nil)
+(use-package doentry-gen :ensure nil
+  :config
+  (setq doentry-gen-dir p-logs-dir)
+  (setq doentry-gen-n-function 'doentry-gen-n-metaf))
 ;; + doentry-mode
 (use-package doentry-mode :ensure nil)
 ;; + diredtza
