@@ -335,6 +335,37 @@ Renvoie la date actuelle si celle de la semaine dernière n'est pas trouvée."
 (defun gtd-semaine-jour ()
   "Renvoie le jour de `gtd-semaine-date'."
   (nth 2 (split-string (gtd-semaine-date) "-")))
+(defun gtd-days-to-end (date)
+  "Return distance in days between DATE (format YYYY-MM-DD) until end of week.
+End of week is either a Saturday or the last day of the month."
+  (let* ((date-start (decode-time (org-time-string-to-time date)))
+         (n (nth 6 date-start))
+         (distance (- 6 n))
+         (date-end (decode-time (time-add (org-time-string-to-time date)
+                                          (* distance 24 3600))))
+         (month-start (nth 4 date-start))
+         (month-end (nth 4 date-end))
+         (year-start (nth 5 date-start))
+         (last-day (calendar-last-day-of-month month-start year-start)))
+    ;; check that date-start and date-end are in the same month
+    ;; if not return the distance from last day of the month of date-start
+    (if (eq month-start month-end)
+        distance
+      (- last-day (nth 3 date-start)))))
+(defun gtd-gen-weeklist (date)
+  "Weeklist for gtd-semaine yasnippet"
+  (let (res
+        (num-days (+ 1 (gtd-days-to-end date))))
+    (dotimes (i num-days)
+      (let* ((date-arr (decode-time (org-time-string-to-time date)))
+             (week-day (nth (+ i (nth 6 date-arr)) jours-de-la-semaine))
+             (string-day (number-to-string (+ i (nth 3 date-arr))))
+             (cur-date (concat (format "%02d" (nth 4 date-arr)) "-"
+                               (format "%02d" (+ i (nth 3 date-arr))))))
+        (setq res (concat res "- _" (capitalize week-day) "_ (" string-day "): ✓/✓✓/✓✓✓/x"
+                          (p-str-taches-predefinies-pour-date cur-date))))
+      (when (< i (- num-days 1)) (setq res (concat res "\n"))))
+    res))
 ;; github.com/alexott/emacs-configs/blob/91fb0a1/rc/emacs-rc-muse.el#L306
 (defun re-replace-text (from to)
   (save-excursion
