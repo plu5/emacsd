@@ -384,6 +384,38 @@ End of week is either a Saturday or the last day of the month."
                   (< (line-number-at-pos) lastline)
                   (setq count (1+ count))))
       (message "%s tâches" count))))
+;; Déplacement automatique d'une tâche
+(defun faire-tache ()
+  (interactive)
+  (beginning-of-line)
+  (when (looking-at "^- \\(.@.*\\)")
+    (let* ((s (match-string-no-properties 1))
+           (spipe (string-match " |" s))
+           (scolon (string-match ":" s))
+           (sub (if spipe (substring s 0 spipe) s))
+           (d (format-time-string "%d"))
+           (h (format-time-string "%H")))
+      (when (and spipe scolon)
+        (right-char (+ 3 scolon))
+        (delete-char (+ (- spipe scolon) 1)))
+      (when (< (string-to-number h) 7)
+        (setq d (number-to-string (1- (string-to-number d)))))
+      (while (not (or (bobp)
+                      (looking-at-p (concat "- _[A-Za-z]*_ (" d "):.*"))))
+        (previous-line))
+      (next-line)            ; entrer dans la sous-liste de la semaine
+      (org-end-of-item-list)
+      (open-line 1)
+      (insert (concat "    + " (format-time-string "%H:%M ") sub))
+      (kill-new sub))))
+;; wrapper pour assigner les deux fonctions précédentes au même raccourci
+(defun taches-wrapper (arg)
+  (interactive "P")
+  (when (= 1 (prefix-numeric-value arg))
+    (faire-tache))
+  (when (= 4 (prefix-numeric-value arg))
+    (compte-de-taches-sous-jour)))
+;; (define-key org-mode-map (kbd "C-c C-c") 'taches-wrapper)
 ;; github.com/alexott/emacs-configs/blob/91fb0a1/rc/emacs-rc-muse.el#L306
 (defun re-replace-text (from to)
   (save-excursion
@@ -607,6 +639,7 @@ End of week is either a Saturday or the last day of the month."
   :bind
   (("C-z t t" . (lambda () (interactive) (org-time-stamp '(4))))
    :map org-mode-map
+   ("C-c C-c" . taches-wrapper)
    ("C-c o" . org-goto)
    ("C-c n" . org-next-item)
    ("C-c p" . org-previous-item)
