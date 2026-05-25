@@ -366,6 +366,24 @@ End of week is either a Saturday or the last day of the month."
                           (p-str-taches-predefinies-pour-date cur-date))))
       (when (< i (- num-days 1)) (setq res (concat res "\n"))))
     res))
+;; compte pour le système de ✓
+(defun compte-de-taches-sous-jour ()
+  "Count t@ p@ r@ between '- _' around cursor"
+  (interactive)
+  (save-excursion
+    (beginning-of-line)
+    (let (lastline
+          (count 0))
+      (while (not (or (eobp) (looking-at-p "^- _.*")))
+        (next-line))
+      (setq lastline (line-number-at-pos))
+      (previous-line)
+      (while (not (or (bobp) (looking-at-p "^- _.*")))
+        (previous-line))
+      (while (and (re-search-forward "\\(t\\|p\\|r\\)@" nil t)
+                  (< (line-number-at-pos) lastline)
+                  (setq count (1+ count))))
+      (message "%s tâches" count))))
 ;; github.com/alexott/emacs-configs/blob/91fb0a1/rc/emacs-rc-muse.el#L306
 (defun re-replace-text (from to)
   (save-excursion
