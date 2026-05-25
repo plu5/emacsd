@@ -37,7 +37,7 @@
 (setq p-reps-dir "/media/Windows/Users/pm/dev/reps")
 
 (setq p-verdicts-path (expand-file-name "verdicts.txt" p-pnotes-path))
-(setq p-yas-snippet-dir (expand-file-name "emacs/yasnippet-snippets" p-pnotes-path))
+(setq p-yas-snippet-dir (expand-file-name "emacsd/yasnippet-snippets" p-reps-dir))
 (setq p-undo-tree-history "~/.emacs.d/undo")
 (setq jekyll-posts-dir (expand-file-name "plu5.github.io/_posts" p-reps-dir))
 
