@@ -368,14 +368,14 @@ End of week is either a Saturday or the last day of the month."
     res))
 ;; compte pour le système de ✓
 (defun compte-de-taches-sous-jour ()
-  "Count t@ p@ r@ between '- _' around cursor"
+  "Count t@ p@ r@ between '- _' (or from '- _' to empty line) around cursor"
   (interactive)
   (save-excursion
     (beginning-of-line)
     (when (looking-at-p "^- _.*") (forward-line))
     (let (lastline
           (count 0))
-      (while (not (or (eobp) (looking-at-p "^- _.*")))
+      (while (not (or (eobp) (looking-at-p "^- _.*") (looking-at-p "^\s*$")))
         (forward-line))
       (setq lastline (line-number-at-pos))
       (forward-line -1)
