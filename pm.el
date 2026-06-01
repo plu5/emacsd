@@ -372,14 +372,15 @@ End of week is either a Saturday or the last day of the month."
   (interactive)
   (save-excursion
     (beginning-of-line)
+    (when (looking-at-p "^- _.*") (forward-line))
     (let (lastline
           (count 0))
       (while (not (or (eobp) (looking-at-p "^- _.*")))
-        (next-line))
+        (forward-line))
       (setq lastline (line-number-at-pos))
-      (previous-line)
+      (forward-line -1)
       (while (not (or (bobp) (looking-at-p "^- _.*")))
-        (previous-line))
+        (forward-line -1))
       (while (and (re-search-forward "\\(t\\|p\\|r\\)@" nil t)
                   (< (line-number-at-pos) lastline)
                   (setq count (1+ count))))
