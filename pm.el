@@ -62,6 +62,7 @@
 (blink-cursor-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1) ; scrollbars don't work well
+(menu-bar-mode -1) ; menu bar causes gtk 'extra_space >= 0' error spam
 (setq inhibit-startup-message t)
 (setq initial-scratch-message nil)
 (setq column-number-mode t)
