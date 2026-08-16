@@ -36,16 +36,17 @@
                         "W:/B/Dropbox/Apps" "/media/pnotes"))
 (setq p-reps-dir "/media/Windows/Users/pm/dev/reps")
 
+(setq p-notes-path (expand-file-name "PlainText 2" p-pnotes-path))
 (setq p-verdicts-path (expand-file-name "verdicts.txt" p-pnotes-path))
 (setq p-yas-snippet-dir (expand-file-name "emacsd/yasnippet-snippets" p-reps-dir))
 (setq p-undo-tree-history "~/.emacs.d/undo")
 (setq jekyll-posts-dir (expand-file-name "plu5.github.io/_posts" p-reps-dir))
 
 ;;; UNIQUE BUFFERS/FILES:
-(setq p-main-file (expand-file-name "PlainText 2/pers/gtd/2026.org" p-pnotes-path))
-(setq p-inbox-file (expand-file-name "PlainText 2/pers/gtd/inbox.org" p-pnotes-path))
-(setq p-inbox2-file (expand-file-name "PlainText 2/pers/gtd/getthisshitoutofmysight.org" p-pnotes-path))
-(setq p-fr-file (expand-file-name "PlainText 2/s/l/fr-phrases.org" p-pnotes-path))
+(setq p-main-file (expand-file-name "pers/gtd/2026.org" p-notes-path))
+(setq p-inbox-file (expand-file-name "pers/gtd/inbox.org" p-notes-path))
+(setq p-inbox2-file (expand-file-name "pers/gtd/getthisshitoutofmysight.org" p-notes-path))
+(setq p-fr-file (expand-file-name "s/l/fr-phrases.org" p-notes-path))
 (setq p-logs-dir (expand-file-name "Day One/Journal.dayone/entries/" p-pnotes-path))
 (setq p-logs-regexp "*.doentry")
 
@@ -480,6 +481,41 @@ End of week is either a Saturday or the last day of the month."
            (remove "--literal-pathspecs" magit-git-global-arguments)))
       (magit-run-git "add" "*.md")
       (magit-run-git "commit" (concat "--message='Update texts " date "'")
+                     "--"))))
+;; utility for commit msg for committing notes and logs
+(defun w-dated-commit-msg ()
+  "Generate string based on date in the format 'Mar 2026-08-11 W32'"
+  (let ((j (capitalize
+            (substring
+             (jour-de-la-semaine-dune-date (format-time-string "%F")) 0 3))))
+    (format-time-string (concat j " %F W%V"))))
+;; notes
+(defun magit-commit-notes ()
+  (interactive)
+  ;; update metaf
+  (with-temp-buffer               ; run without popping buffer
+    (shell-command                ; the output will be in *Messages*
+     (concat "metaf.py -usx csv --sort cr '" p-notes-path "'")
+     t)
+    (message "metaf.py output: %s" (buffer-string)))
+  ;; commit
+  (magit-with-toplevel
+    (let ((magit-git-global-arguments
+           (remove "--literal-pathspecs" magit-git-global-arguments)))
+      (magit-run-git "add" "*.org")
+      (magit-run-git "add" "metaf.json")
+      (magit-run-git "commit" (concat "--message='" (w-dated-commit-msg) "'")
+                     "--"))))
+;; logs
+(defun magit-commit-logs ()
+  (interactive)
+  (doentry-gen-n-metaf)                 ; update metaf
+  (magit-with-toplevel
+    (let ((magit-git-global-arguments
+           (remove "--literal-pathspecs" magit-git-global-arguments)))
+      (magit-run-git "add" "*/*.doentry")
+      (magit-run-git "add" "*/metaf.json")
+      (magit-run-git "commit" (concat "--message='" (w-dated-commit-msg) "'")
                      "--"))))
 
 ;;; FILE DEFUNS (not bound to anything atm, but useful functions to be able to run with M-x)
