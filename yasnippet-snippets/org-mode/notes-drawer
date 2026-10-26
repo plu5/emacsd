@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: notes drawer
+# key: notes
+# --
+:NOTES:
+$0
+:END:
