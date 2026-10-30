@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: gtd-verdicts
+# key: v
+# condition: (looking-back "^v")
+# --
+    + `(let ((txt "r@sys verdicts + objectifs"))
+         (kill-new txt)
+         (concat (format-time-string "%H:%M") " " txt))`$0
